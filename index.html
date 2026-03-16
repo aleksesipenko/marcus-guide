@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Маркус — ваш бизнес-помощник</title>
+  <style>
+    :root {
+      --primary: #1a56db;
+      --primary-dark: #1340aa;
+      --accent: #16a34a;
+      --accent-light: #dcfce7;
+      --warn: #b45309;
+      --warn-light: #fef3c7;
+      --danger: #dc2626;
+      --danger-light: #fee2e2;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --text: #1e293b;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --radius: 16px;
+      --shadow: 0 2px 16px rgba(0,0,0,0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      font-size: 18px;
+      line-height: 1.7;
+    }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #1a56db 0%, #1e40af 60%, #0f2a6e 100%);
+      color: white;
+      padding: 60px 24px 50px;
+      text-align: center;
+    }
+    .hero-icon {
+      font-size: 72px;
+      margin-bottom: 16px;
+      display: block;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 6vw, 48px);
+      font-weight: 800;
+      margin-bottom: 12px;
+      letter-spacing: -0.5px;
+    }
+    .hero p {
+      font-size: clamp(16px, 3vw, 20px);
+      opacity: 0.9;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .hero-badge {
+      display: inline-block;
+      margin-top: 20px;
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.3);
+      border-radius: 100px;
+      padding: 6px 18px;
+      font-size: 15px;
+      font-weight: 600;
+    }
+
+    /* CONTAINER */
+    .container {
+      max-width: 820px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    /* SECTION */
+    section {
+      padding: 48px 0 0;
+    }
+    section:last-child { padding-bottom: 64px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .section-icon {
+      font-size: 36px;
+      flex-shrink: 0;
+    }
+    .section-title {
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* CARD */
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+    .card p { margin-bottom: 12px; }
+    .card p:last-child { margin-bottom: 0; }
+
+    /* INTRO CARD */
+    .intro-card {
+      background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+      border: 2px solid #93c5fd;
+      border-radius: var(--radius);
+      padding: 32px;
+      font-size: 19px;
+      line-height: 1.8;
+    }
+    .intro-card strong { color: var(--primary-dark); }
+
+    /* STEPS */
+    .steps { counter-reset: step; }
+    .step {
+      display: flex;
+      gap: 20px;
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      align-items: flex-start;
+    }
+    .step-num {
+      counter-increment: step;
+      width: 48px;
+      height: 48px;
+      background: var(--primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .step-content h3 {
+      font-size: 19px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      color: var(--text);
+    }
+    .step-content p { color: #374151; font-size: 17px; }
+
+    /* MOCK SCREEN */
+    .mock-screen {
+      background: #f1f5f9;
+      border: 2px dashed #94a3b8;
+      border-radius: 12px;
+      padding: 18px 20px;
+      margin: 12px 0;
+      font-size: 15px;
+      color: #475569;
+      font-style: italic;
+    }
+    .mock-screen::before {
+      content: '📱 Как это выглядит: ';
+      font-style: normal;
+      font-weight: 600;
+      color: #1e293b;
+    }
+
+    /* ABILITIES GRID */
+    .abilities-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 18px;
+    }
+    .ability-card {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 24px;
+      border: 1px solid var(--border);
+      border-top: 4px solid var(--primary);
+    }
+    .ability-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ability-card p {
+      color: #475569;
+      font-size: 16px;
+      margin-bottom: 12px;
+    }
+
+    /* EXAMPLES */
+    .examples {
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 12px 16px;
+      border-left: 4px solid var(--accent);
+    }
+    .examples .ex-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    .examples ul {
+      list-style: none;
+      padding: 0;
+    }
+    .examples li {
+      font-size: 15px;
+      color: #1e293b;
+      padding: 4px 0;
+      padding-left: 20px;
+      position: relative;
+    }
+    .examples li::before {
+      content: '💬';
+      position: absolute;
+      left: 0;
+      font-size: 13px;
+    }
+
+    /* HOW-TO BLOCKS */
+    .howto-block {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      margin-bottom: 20px;
+      border: 1px solid var(--border);
+    }
+    .howto-block h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 16px;
+    }
+    .howto-block ol {
+      padding-left: 24px;
+      color: #374151;
+    }
+    .howto-block ol li {
+      margin-bottom: 12px;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+    .howto-block ul {
+      padding-left: 20px;
+      color: #374151;
+    }
+    .howto-block ul li {
+      margin-bottom: 10px;
+      font-size: 17px;
+    }
+
+    /* TIP BOX */
+    .tip {
+      background: var(--accent-light);
+      border: 1px solid #86efac;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 16px;
+      color: #14532d;
+    }
+    .tip::before { content: '✅ '; font-size: 18px; }
+
+    .warn-box {
+      background: var(--warn-light);
+      border: 1px solid #fcd34d;
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin: 16px 0;
+      font-size: 16px;
+      color: #78350f;
+    }
+    .warn-box::before { content: '⚠️ '; font-size: 18px; }
+
+    /* CANT-DO LIST */
+    .cantdo-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 16px;
+    }
+    .cantdo-item {
+      background: var(--danger-light);
+      border: 1px solid #fca5a5;
+      border-radius: 12px;
+      padding: 20px 24px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .cantdo-icon { font-size: 28px; flex-shrink: 0; }
+    .cantdo-text h4 { font-size: 16px; font-weight: 700; color: #991b1b; margin-bottom: 6px; }
+    .cantdo-text p { font-size: 15px; color: #7f1d1d; line-height: 1.5; }
+
+    /* FAQ */
+    .faq-item {
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+    }
+    .faq-q {
+      padding: 22px 28px;
+      font-size: 18px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      user-select: none;
+      gap: 12px;
+    }
+    .faq-q:hover { background: #f8fafc; }
+    .faq-arrow { font-size: 20px; transition: transform 0.2s; flex-shrink: 0; }
+    .faq-item.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a {
+      display: none;
+      padding: 0 28px 22px;
+      font-size: 17px;
+      color: #374151;
+      line-height: 1.7;
+      border-top: 1px solid var(--border);
+      padding-top: 18px;
+    }
+    .faq-item.open .faq-a { display: block; }
+
+    /* CONTACT CARD */
+    .contact-card {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+      color: white;
+      border-radius: var(--radius);
+      padding: 40px 32px;
+      text-align: center;
+    }
+    .contact-card h3 { font-size: 24px; font-weight: 800; margin-bottom: 12px; }
+    .contact-card p { font-size: 17px; opacity: 0.9; margin-bottom: 24px; }
+    .contact-methods { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
+    .contact-btn {
+      background: rgba(255,255,255,0.12);
+      border: 1.5px solid rgba(255,255,255,0.3);
+      color: white;
+      border-radius: 100px;
+      padding: 12px 26px;
+      font-size: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: background 0.2s;
+    }
+    .contact-btn:hover { background: rgba(255,255,255,0.2); }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 2px solid var(--border);
+      margin: 0;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 32px 16px;
+      color: var(--muted);
+      font-size: 15px;
+      border-top: 1px solid var(--border);
+    }
+
+    /* INLINE TAG */
+    .tag {
+      display: inline-block;
+      background: #dbeafe;
+      color: #1e40af;
+      border-radius: 6px;
+      padding: 2px 10px;
+      font-size: 15px;
+      font-weight: 700;
+      font-family: monospace;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      .hero { padding: 44px 16px 38px; }
+      .card, .howto-block, .faq-q { padding: 20px; }
+      .abilities-grid, .cantdo-grid { grid-template-columns: 1fr; }
+      .step { flex-direction: column; gap: 12px; }
+      .step-num { width: 40px; height: 40px; font-size: 18px; }
+      body { font-size: 16px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <span class="hero-icon">🤝</span>
+  <h1>Маркус — ваш бизнес-помощник</h1>
+  <p>Умный помощник в Telegram, который всегда под рукой — для вопросов по бизнесу, расчётов и советов</p>
+  <div class="hero-badge">📱 Работает прямо в Telegram</div>
+</div>
+
+<div class="container">
+
+  <!-- 1. КТО ТАКОЙ МАРКУС -->
+  <section>
+    <div class="section-header">
+      <span class="section-icon">👤</span>
+      <h2 class="section-title">Кто такой Маркус?</h2>
+    </div>
+    <div class="intro-card">
+      <p><strong>Маркус</strong> — это умный помощник по бизнесу, который живёт в Telegram в вашем семейном рабочем чате. Он помогает разобраться с вопросами по Wildberries, считает прибыль и расходы, объясняет непонятные термины простыми словами.</p>
+      <p>Маркус не засыпает, не уходит в отпуск и всегда готов ответить — достаточно написать ему в чате. Он работает как спокойный деловой партнёр: без лишних слов, только по делу.</p>
+      <p>Маркуса создал Алекс специально для вашего бизнеса 🎈🌸</p>
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- 2. КАК НАЧАТЬ ОБЩАТЬСЯ -->
+  <section>
+    <div class="section-header">
+      <span class="section-icon">🚀</span>
+      <h2 class="section-title">Как начать общаться</h2>
+    </div>
+
+    <div class="card">
+      <p>Маркус находится в вашем <strong>семейном бизнес-чате</strong> в Telegram. Он не отвечает сам по себе — только когда вы к нему обращаетесь. Это сделано специально, чтобы он не мешал обычному общению в чате.</p>
+    </div>
+
+    <div class="steps">
+
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-content">
+          <h3>Откройте Telegram и зайдите в семейный бизнес-чат</h3>
+          <p>Это ваш общий рабочий чат. Если не знаете, где он — спросите Алекса, он добавит вас.</p>
+          <div class="mock-screen">Вы видите список чатов в Telegram. Найдите чат с названием семейного бизнеса и нажмите на него.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-content">
+          <h3>Напишите сообщение и в начале укажите <span class="tag">@marcus_business_bot</span></h3>
+          <p>Это как «окликнуть» Маркуса по имени. Если вы не напишете <span class="tag">@marcus_business_bot</span> — он не поймёт, что обращаются к нему, и не ответит.</p>
+          <div class="mock-screen">В поле для ввода сообщения вы набираете: @marcus_business_bot и затем ваш вопрос. Например: @marcus_business_bot сколько нам нужно заработать, чтобы покрыть расходы за март?</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-content">
+          <h3>Нажмите кнопку отправки (стрелочка ➡️)</h3>
+          <p>Маркус прочитает ваш вопрос и через несколько секунд ответит прямо в чате.</p>
+          <div class="mock-screen">Через 5–15 секунд в чате появится ответ от Маркуса — спокойный, чёткий, по делу.</div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-content">
+          <h3>Можно ответить на его сообщение (без тега)</h3>
+          <p>Если хотите продолжить разговор — нажмите и удержите его сообщение, выберите «Ответить» и пишите. В этом случае <span class="tag">@marcus_business_bot</span> писать не нужно — Маркус поймёт, что вы отвечаете ему.</p>
+          <div class="mock-screen">Вы нажимаете и удерживаете сообщение Маркуса → появляется меню → выбираете «Ответить» → пишете следующий вопрос. Тег писать не нужно.</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="tip">Запомните главное: <strong>@marcus_business_bot</strong> — это «имя» Маркуса в чате. Напишите его в начале сообщения, и он ответит.</div>
+
+  </section>
+
+  <hr class="divider" />
+
+  <!-- 3. ЧТО МАРКУС УМЕЕТ -->
+  <section>
+    <div class="section-header">
+      <span class="section-icon">💡</span>
+      <h2 class="section-title">Что Маркус умеет</h2>
+    </div>
+
+    <div class="abilities-grid">
+
+      <div class="ability-card">
+        <h3>📦 Wildberries и торговля</h3>
+        <p>Помогает разобраться с правилами WB, комиссиями, выгодными условиями поставки и продвижением товаров.</p>
+        <div class="examples">
+          <div class="ex-label">Примеры вопросов</div>
+          <ul>
+            <li>Какая сейчас комиссия WB на воздушные шары?</li>
+            <li>Выгодно ли нам делать акцию на шары к 8 марта?</li>
+            <li>Как правильно оформить карточку товара для шаров?</li>
+            <li>Сколько штук надо продать, чтобы выйти в топ по запросу «шары на день рождения»?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ability-card">
+        <h3>🧮 Расчёты и финансы</h3>
+        <p>Считает маржу (чистую прибыль), себестоимость, точку безубыточности. Объясняет, сколько вы зарабатываете на каждом товаре.</p>
+        <div class="examples">
+          <div class="ex-label">Примеры вопросов</div>
+          <ul>
+            <li>Мы покупаем шар за 80 рублей, продаём за 350 — сколько остаётся после всех расходов?</li>
+            <li>Сколько нужно продать букетов в месяц, чтобы покрыть аренду 30 000 рублей?</li>
+            <li>Посчитай маржу на сборные букеты, если закупка 1200 р., продажа 3500 р.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ability-card">
+        <h3>🌸 Флористика и шары</h3>
+        <p>Помогает с вопросами по вашему конкретному бизнесу — сезонность, ассортимент, конкуренты, ценообразование.</p>
+        <div class="examples">
+          <div class="ex-label">Примеры вопросов</div>
+          <ul>
+            <li>Какие шары лучше всего продаются в сентябре?</li>
+            <li>Стоит ли добавить фольгированные шары в ассортимент?</li>
+            <li>Как конкуренты оформляют карточки с цветами на WB?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ability-card">
+        <h3>📊 Анализ и отчёты</h3>
+        <p>Может сделать сводный расчёт и сохранить его в удобный файл, который вы сможете открыть или распечатать.</p>
+        <div class="examples">
+          <div class="ex-label">Примеры вопросов</div>
+          <ul>
+            <li>Составь мне таблицу расходов и доходов за март</li>
+            <li>Сохрани расчёт маржи в файл, хочу показать партнёру</li>
+            <li>Сделай сводку: что нам выгоднее — шары или цветы?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ability-card">
+        <h3>📖 Объяснение терминов</h3>
+        <p>Если встретили незнакомое слово — спросите Маркуса. Он объяснит простым языком, без умных слов.</p>
+        <div class="examples">
+          <div class="ex-label">Примеры вопросов</div>
+          <ul>
+            <li>Что такое «юнит-экономика»?</li>
+            <li>Объясни простыми словами, что значит «оборачиваемость товара»</li>
+            <li>Что такое FBO и FBS на Wildberries?</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="ability-card">
+        <h3>🔍 Поиск актуальной информации</h3>
+        <p>Маркус может найти свежую информацию в интернете — актуальные тарифы WB, новости рынка, изменения правил.</p>
+        <div class="examples">
+          <div class="ex-label">Примеры вопросов</div>
+          <ul>
+            <li>Какие сейчас тарифы WB на хранение в марте 2025?</li>
+            <li>Изменились ли правила работы с самовыкупами на WB?</li>
+            <li>Найди, сколько стоит гелий оптом в Казани сейчас</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <hr class="divider" />
+
+  <!-- 4. КАК ЗАДАТЬ ВОПРОС ТЕКСТОМ -->
+  <section>
+    <div class="section-header">
+      <span class="section-icon">✍️</span>
+      <h2 class="section-title">Как задать вопрос текстом</h2>
+    </div>
+
+    <div class="howto-block">
+      <h3>Пошагово:</h3>
+      <ol>
+        <li>Откройте семейный бизнес-чат в Telegram</li>
+        <li>Нажмите на поле для ввода текста (внизу экрана)</li>
+        <li>Напишите: <span class="tag">@marcus_business_bot</span> и ваш вопрос</li>
+        <li>Нажмите кнопку отправки (синяя стрелка)</li>
+        <li>Подождите несколько секунд — ответ придёт в чат</li>
+      </ol>
+    </div>
+
+    <div class="card">
+      <p><strong>Пример готового сообщения:</strong></p>
+      <div class="mock-screen">@marcus_business_bot мы продаём шары по 350 рублей, закупаем по 90. Сколько нам нужно продать в месяц, чтобы заработать 50 000 чистыми?</div>
+    </div>
+
+    <div class="tip">Чем подробнее вы описываете ситуацию, тем точнее ответ. Не бойтесь писать «по-простому» — Маркус всё поймёт.</div>
+
+    <div class="warn-box">Если написать вопрос без <span class="tag">@marcus_business_bot</span> — Маркус не ответит. Это нормально: он намеренно не читает весь чат, чтобы не мешать вашему общению.</div>
+
+  </section>
+
+  <hr class="divider" />
+
+  <!-- 5. КАК ОТПРАВИТЬ ГОЛОСОВОЕ -->
+  <section>
+    <div class="section-header">
+      <span class="section-icon">🎙️</span>
+      <h2 class="section-title">Как отправить голосовое сообщение</h2>
+    </div>
+
+    <div class="card">
+      <p>Маркус умеет <strong>слышать голосовые сообщения</strong>. Вы можете просто наговорить вопрос вслух — не нужно ничего набирать.</p>
+    </div>
+
+    <div class="howto-block">
+      <h3>Как записать голосовое:</h3>
+      <ol>
+        <li>Зайдите в чат и найдите сообщение Маркуса (или любое другое)</li>
+        <li><strong>Нажмите и удержите</strong> его сообщение — появится меню</li>
+        <li>Выберите «<strong>Ответить</strong>»</li>
+        <li>В поле ввода нажмите и удерживайте значок микрофона 🎤 (он справа)</li>
+        <li>Говорите ваш вопрос</li>
+        <li>Отпустите кнопку — сообщение отправится</li>
+      </ol>
+      <div class="mock-screen">Вы нажали «Ответить» на сообщение Маркуса, затем удержали микрофон и наговорили: «Маркус, посчитай, сколько стоит собрать букет из 15 роз, если одна роза стоит нам 120 рублей, плюс упаковка 80 рублей». Маркус услышит это и ответит текстом.</div>
+    </div>
+
+    <div class="tip">Голосовые работают только через «Ответить» на сообщение Маркуса — тогда он понимает, что вопрос адресован ему. Просто записать голосовое в чат без ответа на Маркуса не сработает.</div>
+
+  </section>
+
+  <hr class="divider" />
+
+  <!-- 6. КАК ПОПРОСИТЬ РАСЧЁТ -->
+  <section>
+    <div class="section-header">
+      <span class="section-icon">📐</span>
+      <h2 class="section-title">Как попросить расчёт или анализ</h2>
+    </div>
+
+    <div class="card">
+      <p>Маркус умеет делать <strong>подробные расчёты</strong>: маржа, прибыль, расходы, точка безубыточности. Для этого нужно просто дать ему цифры.</p>
+    </div>
+
+    <div class="howto-block">
+      <h3>Просто опишите задачу своими словами:</h3>
+      <ul>
+        <li>Не нужно никаких таблиц или специальных форматов</li>
+        <li>Просто напишите числа так, как вам удобно</li>
+        <li>Если нужен файл с расчётом — попросите его явно</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <p><strong>Примеры запросов на расчёт:</strong></p>
+      <div class="examples">
+        <div class="ex-label">Примеры</div>
+        <ul>
+          <li>@marcus_business_bot закупаем воздушные шары по 40 рублей, продаём по 200. Доставка обходится в 8 000 в месяц, аренда склада 15 000. Сколько шаров нужно продать в месяц, чтобы выйти в ноль?</li>
+          <li>@marcus_business_bot посчитай: выручка за февраль 180 000, закупки 70 000, доставка 12 000, упаковка 8 000, комиссия WB 15 000. Сколько осталось чистыми?</li>
+          <li>@marcus_business_bot сделай расчёт маржи на шары и сохрани в файл — хочу распечатать</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="tip">Если ответ получился длинным — Маркус пришлёт короткое резюме в чат, а полный расчёт сохранит в файл. Файл можно открыть или переслать.</div>
+
+  </section>
+
+  <hr class="divider" />
+
+  <!-- 7. ЧТО МАРКУС НЕ ДЕЛАЕТ -->
+  <section>
+    <div class="section-header">
+      <span class="section-icon">🚫</span>
+      <h2 class="section-title">Что Маркус НЕ делает</h2>
+    </div>
+
+    <div class="card">
+      <p>Чтобы не было разочарований — вот что Маркус делать не будет. Это не недостатки, а намеренные ограничения для вашей безопасности.</p>
+    </div>
+
+    <div class="cantdo-grid">
+
+      <div class="cantdo-item">
+        <div class="cantdo-icon">🔒</div>
+        <div class="cantdo-text">
+          <h4>Не входит в личный кабинет WB</h4>
+          <p>Маркус не имеет доступа к вашему кабинету на Wildberries и ничего там не делает. Все действия — только вы сами.</p>
+        </div>
+      </div>
+
+      <div class="cantdo-item">
+        <div class="cantdo-icon">💳</div>
+        <div class="cantdo-text">
+          <h4>Не управляет деньгами</h4>
+          <p>Маркус не может переводить деньги, не имеет доступа к банковским счетам и никогда их не запросит.</p>
+        </div>
+      </div>
+
+      <div class="cantdo-item">
+        <div class="cantdo-icon">📢</div>
+        <div class="cantdo-text">
+          <h4>Не пишет в чат сам по себе</h4>
+          <p>Маркус не будет писать сообщения без вашего обращения. Он молчит, пока вы к нему не обратитесь.</p>
+        </div>
+      </div>
+
+      <div class="cantdo-item">
+        <div class="cantdo-icon">📁</div>
+        <div class="cantdo-text">
+          <h4>Не передаёт финансовые данные третьим лицам</h4>
+          <p>Все расчёты и цифры хранятся только на вашем компьютере. Никуда наружу не уходят.</p>
+        </div>
+      </div>
+
+      <div class="cantdo-item">
+        <div class="cantdo-icon">⚡</div>
+        <div class="cantdo-text">
+          <h4>Не делает ничего серьёзного без подтверждения</h4>
+          <p>Если Маркус хочет что-то сделать на WB (например, изменить цену) — он обязательно сначала спросит ваше разрешение.</p>
+        </div>
+      </div>
+
+      <div class="cantdo-item">
+        <div class="cantdo-icon">🌍</div>
+        <div class="cantdo-text">
+          <h4>Не отвечает на нерабочие темы</h4>
+          <p>Маркус специализируется на бизнесе. Про погоду, рецепты или новости — не его тема.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <hr class="divider" />
+
+  <!-- 8. FAQ -->
+  <section>
+    <div class="section-header">
+      <span class="section-icon">❓</span>
+      <h2 class="section-title">Частые вопросы</h2>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Маркус не отвечает. Что делать?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        Проверьте несколько вещей: 1) вы написали <span class="tag">@marcus_business_bot</span> в начале сообщения? 2) Вы в правильном чате (семейный бизнес-чат)? 3) Прошло ли 20–30 секунд? Иногда ответ появляется не сразу. Если всё равно нет ответа — напишите Алексу.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Можно ли писать Маркусу напрямую, не через группу?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        Маркус настроен работать в семейном бизнес-чате. Писать ему в личные сообщения не нужно — он там может не ответить. Пользуйтесь чатом.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Маркус ошибся в расчётах. Что делать?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        Маркус — умный, но не идеальный. Если расчёт кажется неверным — уточните вопрос или дайте больше цифр. Напишите: «Маркус, это не похоже на правду — перепроверь, пожалуйста». Он пересчитает. Важные финансовые решения всегда лучше проверить самостоятельно или с бухгалтером.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Маркус хранит наши данные? Это безопасно?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        Все финансовые данные хранятся только локально — на компьютере Алекса, а не в интернете или у посторонних. Маркус не передаёт ваши цифры никуда наружу. Можно пользоваться спокойно.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Как получить расчёт в виде файла?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        Просто попросите явно в сообщении: «...и сохрани результат в файл» или «...пришли мне это в виде документа». Маркус сделает PDF или текстовый файл и пришлёт его прямо в чат.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Можно ли говорить голосовые сообщения на русском?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        Да! Маркус прекрасно понимает русскую речь. Говорите своими словами, как обычно говорите — он разберётся.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Маркус может найти информацию по конкурентам на WB?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        Да, Маркус умеет искать актуальную информацию в интернете. Попросите его, например: «@marcus_business_bot найди, какие шарики сейчас в топе на WB по запросу "шары на день рождения"» — и он поищет.
+      </div>
+    </div>
+
+    <div class="faq-item">
+      <div class="faq-q" onclick="toggleFaq(this)">
+        Могут ли другие участники чата видеть мои вопросы Маркусу?
+        <span class="faq-arrow">▼</span>
+      </div>
+      <div class="faq-a">
+        Да, это групповой чат, поэтому ваши сообщения видят все его участники. Если хотите обсудить что-то конфиденциальное — лучше спросить Алекса насчёт приватного доступа.
+      </div>
+    </div>
+
+  </section>
+
+  <hr class="divider" />
+
+  <!-- 9. КОНТАКТ — АЛЕКС -->
+  <section>
+    <div class="section-header">
+      <span class="section-icon">🆘</span>
+      <h2 class="section-title">Если что-то не работает</h2>
+    </div>
+
+    <div class="contact-card">
+      <h3>Напишите Алексу 👨‍💻</h3>
+      <p>Если Маркус не отвечает, ведёт себя странно или вы не понимаете, как что-то сделать — просто напишите Алексу. Он всё настроит и объяснит.</p>
+      <div class="contact-methods">
+        <a href="https://t.me/alexesip" class="contact-btn">📱 Telegram: @alexesip</a>
+      </div>
+      <p style="margin-top: 20px; opacity: 0.7; font-size: 15px;">Алекс создал Маркуса и знает, как он работает. Не стесняйтесь спрашивать ✨</p>
+    </div>
+
+  </section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p>Маркус — бизнес-ассистент для семьи 🎈 Создан с любовью Алексом</p>
+  <p style="margin-top: 8px; font-size: 13px; color: #94a3b8;">Инструкция актуальна · @marcus_business_bot</p>
+</footer>
+
+<script>
+  function toggleFaq(el) {
+    const item = el.parentElement;
+    item.classList.toggle('open');
+  }
+</script>
+
+</body>
+</html>
